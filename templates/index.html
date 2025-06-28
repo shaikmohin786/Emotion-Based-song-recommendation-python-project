@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Music Player - Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+        }
+        audio {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🎵 Chatbot Music Player 🎵</h1>
+    <form method="POST" action="/chatbot">
+        <label for="mood">Choose Mood:</label>
+        <select name="mood" id="mood" required>
+            <option value="bored">Bored</option>
+            <option value="happy">Happy</option>
+            <option value="sad">Sad</option>
+            <option value="dj">DJ</option>
+            <option value="love failure">Love Failure</option>
+        </select>
+
+        <label for="language">Choose Language:</label>
+        <select name="language" id="language" required>
+            <option value="telugu">Telugu</option>
+            <option value="hindi">Hindi</option>
+            <option value="english">English</option>
+        </select>
+
+        <button type="submit">Get Songs</button>
+    </form>
+
+    {% if songs %}
+        <h2>Available Songs:</h2>
+        {% for song in songs %}
+            <p>{{ song.title }}</p>
+            <audio controls>
+                <source src="{{ song.url }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        {% endfor %}
+    {% endif %}
+</body>
+
+</html>
